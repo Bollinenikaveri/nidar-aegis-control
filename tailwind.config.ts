@@ -61,7 +61,37 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				/* Mission Control Status Colors */
+				operational: {
+					DEFAULT: 'hsl(var(--operational))',
+					foreground: 'hsl(var(--operational-foreground))'
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))'
+				},
+				critical: {
+					DEFAULT: 'hsl(var(--critical))',
+					foreground: 'hsl(var(--critical-foreground))'
+				},
+				secure: {
+					DEFAULT: 'hsl(var(--secure))',
+					foreground: 'hsl(var(--secure-foreground))'
 				}
+			},
+			/* Glassmorphism Effects */
+			backdropBlur: {
+				'glass': '16px',
+			},
+			boxShadow: {
+				'glass': 'var(--glass-shadow)',
+				'glass-inset': 'inset 0 1px 0 0 hsl(var(--glass-border))',
+			},
+			backgroundImage: {
+				'glass': 'var(--gradient-glass)',
+				'primary-gradient': 'var(--gradient-primary)',
+				'status-gradient': 'var(--gradient-status)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
