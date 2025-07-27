@@ -1,38 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MissionHeader from '@/components/MissionHeader';
-import KMLUploadWidget from '@/components/KMLUploadWidget';
-import MissionMap from '@/components/MissionMap';
-import LiveDroneFeed from '@/components/LiveDroneFeed';
-import MissionControlCard from '@/components/MissionControlCard';
+import RealTimeMap from '@/components/RealTimeMap';
+import MissionControl from '@/components/MissionControl';
+import LiveFeedSwitcher from '@/components/LiveFeedSwitcher';
 import AlertsSection from '@/components/AlertsSection';
 import DroneLocationsTelemetry from '@/components/DroneLocationsTelemetry';
 
 const Index = () => {
+  const [missionActive, setMissionActive] = useState(false);
+
+  const handleMissionStart = () => {
+    setMissionActive(true);
+  };
+
+  const handleMissionAbort = () => {
+    setMissionActive(false);
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
       <MissionHeader />
       
-      {/* Main Content */}
-      <div className="flex-1 p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
-          {/* Left Panel */}
-          <div className="lg:col-span-2 space-y-6">
-            <KMLUploadWidget />
-            <MissionMap />
-            <LiveDroneFeed />
-          </div>
-          
-          {/* Right Panel */}
-          <div className="lg:col-span-2 grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <div className="space-y-6">
-              <MissionControlCard />
-              <AlertsSection />
-            </div>
-            <div className="space-y-6">
-              <DroneLocationsTelemetry />
-            </div>
-          </div>
+      {/* Fixed Dashboard Layout */}
+      <div className="flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-0">
+        {/* Left Panel - Mission Controls */}
+        <div className="lg:col-span-3 space-y-4 overflow-y-auto">
+          <MissionControl 
+            onMissionStart={handleMissionStart}
+            onMissionAbort={handleMissionAbort}
+            missionActive={missionActive}
+          />
+          <AlertsSection />
+        </div>
+        
+        {/* Center Panel - Real-Time Map */}
+        <div className="lg:col-span-6 min-h-0">
+          <RealTimeMap missionActive={missionActive} />
+        </div>
+        
+        {/* Right Panel - Live Feed & Telemetry */}
+        <div className="lg:col-span-3 space-y-4 overflow-y-auto">
+          <LiveFeedSwitcher />
+          <DroneLocationsTelemetry />
         </div>
       </div>
     </div>
